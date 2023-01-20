@@ -1,0 +1,18 @@
+example.property: 'DEFAULT'
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate.ddl-auto: update
+    open-in-view: false
+    properties:
+      jakarta:
+        persistence:
+          sharedCache:
+            mode: ALL
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: "*"

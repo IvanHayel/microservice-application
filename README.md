@@ -1,1 +1,1 @@
-# microservice-application
+![dev-stage](docs/dev-stage.png)

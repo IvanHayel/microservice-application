@@ -1,0 +1,5 @@
+example.property: 'PROD'
+spring.datasource:
+  url: jdbc:postgresql://localhost:5432/microservice-app-prod
+  username: postgres
+  password: root

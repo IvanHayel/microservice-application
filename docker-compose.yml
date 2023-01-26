@@ -15,7 +15,7 @@ services:
         aliases:
           - "database"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -29,6 +29,21 @@ services:
       backend:
         aliases:
           - "configuration-server"
+  eureka-server:
+    build:
+      context: eureka-server
+      dockerfile: Dockerfile
+    ports:
+      - "8070:8070"
+    depends_on:
+      database:
+        condition: service_healthy
+      configuration-server:
+        condition: service_started
+    networks:
+      backend:
+        aliases:
+          - "eureka-server"
   license-service:
     build:
       context: licensing-service
@@ -46,6 +61,23 @@ services:
       backend:
         aliases:
           - "license-service"
+  organization-service:
+    build:
+      context: organization-service
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      PROFILE: "dev"
+    depends_on:
+      database:
+        condition: service_healthy
+      configuration-server:
+        condition: service_started
+    networks:
+      backend:
+        aliases:
+          - "organization-service"
 networks:
   backend:
     driver: bridge

@@ -10,6 +10,8 @@ spring:
         persistence:
           sharedCache:
             mode: ALL
+server:
+  port: 8081
 management:
   endpoints:
     enabled-by-default: true
